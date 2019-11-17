@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const DB_URL = "mongodb://localhost:27017/book-app";
+const exports = require('./Book');
 
 mongoose.connect(DB_URL, {
   useNewUrlParser: true,
