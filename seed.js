@@ -69,3 +69,5 @@ db.Book.deleteMany({}, function(err, books){
     });
   }
 });
+
+module.exports = books_list

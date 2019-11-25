@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //-------------------------------CONFIGURATION VARIABLES
 const PORT = process.env.PORT || 3000;
 
-let newBookUUID = 18;
 
 // ----------------------------ROUTES
 
@@ -46,7 +45,10 @@ app.get('/api/books/:id',  (req, res) => {
   let books = db.Book
   console.log(books._id)
   db.Book.findOne({_id : bookId}, (err, foundBook)=>{
-    if(err) {return console.log(err)}
+    if(err) {
+      res.sendStatus(500)
+      return console.log(err)
+    }
     res.json(foundBook);
     console.log('books show', req.params);
   });  
@@ -60,8 +62,7 @@ app.post('/api/books',  (req, res) => {
   
   db.Book.create(newBook, (err, newBook)=>{
     if(err){ return console.log(err) }
-    newBook._id = newBookUUID++;
-    books.push(newBook);
+//    books.push(newBook);
     res.json(newBook);
   });
 });
@@ -103,3 +104,4 @@ app.delete('/api/books/:id',  (req, res) => {
 
 // Start Server
 app.listen(PORT, () => console.log(`Book app listening at http://localhost:${PORT}/`));
+
